@@ -109,33 +109,4 @@ PATCH	/tarefas/{id}/pendente	Marca tarefa como pendente
 
 ### Estrutura do Projeto
 
-Backend
-text
-src/
-├── main/
-│   ├── java/
-│   │   └── com/
-│   │       └── exemplo/
-│   │           ├── config/
-│   │           ├── controller/
-│   │           ├── dto/
-│   │           ├── exception/
-│   │           ├── model/
-│   │           ├── repository/
-│   │           ├── service/
-│   │           └── ControleTarefaApplication.java
-│   └── resources/
-
-Frontend
-text
-src/
-├── app/
-│   ├── components/
-│   │   ├── lista-tarefa/
-│   │   └── formulario-tarefa/
-│   ├── models/
-│   ├── services/
-│   ├── utils/
-│   └── app.component.*
-├── assets/
-└── environments/
+![Estrutura do projeto](estrutura_projeto.png)
