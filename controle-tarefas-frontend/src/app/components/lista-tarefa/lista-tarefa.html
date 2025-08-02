@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="filter-container">
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput [formControl]="nomeFilter" placeholder="Filtrar por nome">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prioridade</mat-label>
+      <mat-select [formControl]="prioridadeFilter">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let prioridade of prioridades" [value]="prioridade">
+          {{ prioridade }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Situação</mat-label>
+      <mat-select [formControl]="situacaoFilter">
+        <mat-option value="">Todas</mat-option>
+        <mat-option *ngFor="let situacao of situacoes" [value]="situacao">
+          {{ situacao }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSortChange($event)" class="full-width">
+    <!-- Nome Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+      <td mat-cell *matCellDef="let tarefa"> {{tarefa.nome}} </td>
+    </ng-container>
+
+    <!-- Prioridade Column -->
+    <ng-container matColumnDef="prioridade">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prioridade </th>
+      <td mat-cell *matCellDef="let tarefa"> {{tarefa.prioridade}} </td>
+    </ng-container>
+
+    <!-- Situação Column -->
+    <ng-container matColumnDef="situacao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Situação </th>
+      <td mat-cell *matCellDef="let tarefa"> {{tarefa.situacao}} </td>
+    </ng-container>
+
+    <!-- Data Prevista Column -->
+    <ng-container matColumnDef="dataPrevistaConclusao">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Prevista </th>
+      <td mat-cell *matCellDef="let tarefa"> {{tarefa.dataPrevistaConclusao | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- Ações Column -->
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Ações </th>
+      <td mat-cell *matCellDef="let tarefa">
+        <button mat-icon-button color="primary" [routerLink]="['/edit', tarefa.id]" matTooltip="Editar">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="deleteTarefa(tarefa.id)" matTooltip="Excluir">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button *ngIf="tarefa.status !== 'CONCLUIDA'" mat-icon-button color="accent"
+                (click)="marcarComoCompleta(tarefa.id)" matTooltip="Marcar como concluída">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+
+        <button *ngIf="tarefa.status !== 'PENDENTE'" mat-icon-button color="accent"
+                (click)="marcarComoPendente(tarefa.id)" matTooltip="Marcar como pendente">
+          <mat-icon>pending</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage"
+                 (page)="onPageChange($event)" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

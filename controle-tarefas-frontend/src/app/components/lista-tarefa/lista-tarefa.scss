@@ -1,0 +1,18 @@
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+table {
+  margin-bottom: 16px;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}

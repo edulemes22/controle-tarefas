@@ -1,0 +1,53 @@
+<div class="container">
+  <form [formGroup]="tarefaForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" required>
+      <mat-error *ngIf="tarefaForm.get('nome')?.hasError('required')">
+        Nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="descricao" rows="3"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Prioridade</mat-label>
+      <mat-select formControlName="prioridade" required>
+        <mat-option *ngFor="let prioridade of prioridades" [value]="prioridade">
+          {{ prioridade }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="tarefaForm.get('prioridade')?.hasError('required')">
+        Prioridade é obrigatória
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="full-width">
+      <mat-label>Data Prevista de Conclusão</mat-label>
+      <input matInput
+            [matDatepicker]="picker"
+            formControlName="dataPrevistaConclusao"
+            required
+            [matDatepickerFilter]="dateFilter">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="tarefaForm.get('dataPrevistaConclusao')?.hasError('required')">
+        Data é obrigatória
+      </mat-error>
+      <mat-error *ngIf="tarefaForm.get('dataPrevistaConclusao')?.hasError('dateInPast')">
+        Data não pode ser anterior à data atual
+      </mat-error>
+    </mat-form-field>
+
+    <div class="button-container">
+      <button mat-raised-button color="primary" type="submit">
+        {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <button mat-button type="button" routerLink="/">Cancelar</button>
+    </div>
+  </form>
+</div>

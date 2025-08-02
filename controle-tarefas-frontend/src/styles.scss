@@ -1,0 +1,29 @@
+/* Estilos mínimos para funcionar */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'ngx-toastr/toastr';
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding: 16px;
+}
+
+.container {
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.button-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}

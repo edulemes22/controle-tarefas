@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/" routerLinkActive="active-link">
+    <mat-icon>list</mat-icon>
+    Lista de Tarefas
+  </button>
+  <button mat-button routerLink="/new" routerLinkActive="active-link">
+    <mat-icon>add</mat-icon>
+    Nova Tarefa
+  </button>
+</mat-toolbar>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
